@@ -35,7 +35,7 @@ func main() {
 	gin.SetMode(cfg.Server.GinMode)
 
 	// Initialize database
-	if err := initDatabase(cfg); err != nil {
+	if err = initDatabase(cfg); err != nil {
 		log.Fatalf("Failed to initialize database: %v", err)
 	}
 
