@@ -1,0 +1,11 @@
+CREATE TABLE IF NOT EXISTS links (
+    id BIGSERIAL PRIMARY KEY,
+    slug VARCHAR(255) UNIQUE NOT NULL,
+    target_url TEXT NOT NULL,
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    expires_at TIMESTAMPTZ,
+    click_limit INTEGER,
+    click_count INTEGER DEFAULT 0 NOT NULL
+    );
+
+CREATE INDEX IF NOT EXISTS idx_slug ON links (slug);
