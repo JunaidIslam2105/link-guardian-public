@@ -4,12 +4,29 @@ A production-ready URL shortening service with access analytics and security fea
 
 ## Features
 - REST API with JWT authentication
-- Redis-backed rate limiting
-- PostgreSQL data storage
-- Access logging and analytics
+- Redis-backed rate limiting with configurable thresholds
+- Link expiration dates and click limits per shortened URL
+- PostgreSQL data storage with soft deletion
+- Detailed access logging including:
+  - Geographic location tracking
+  - Device type detection
+  - Referrer URL tracking
+  - Timestamped access records
 - React frontend with TypeScript
 - Dockerized deployment
 - DB migrations
+
+## API Endpoints
+
+| Method | Path | Description | Authentication Required |
+|--------|------|-------------|--------------------------|
+| GET    | /l/:slug | Redirect to original URL | No |
+| GET    | /logs/user | List access logs for authenticated user | Yes |
+| POST   | /signup | Create new user account | No |
+| POST   | /login | Authenticate user | No |
+| POST   | /links | Create new shortened link | Yes |
+| GET    | /links | List user's shortened links | Yes |
+| DELETE | /links/:slug | Delete a shortened link | Yes |
 
 ## Prerequisites
 - Go 1.21+
@@ -47,21 +64,6 @@ cd web
 npm install
 npm run dev
 ```
-
-### Docker
-```bash
-docker-compose up -d
-```
-
-## API Documentation
-
-Endpoints:
-- `POST /auth/register` - User registration
-- `POST /auth/login` - User authentication
-- `POST /links` - Create short URL
-- `GET /links/{slug}` - Redirect to original URL
-- `GET /logs/{slug}` - Get access analytics
-
 
 ## Contributing
 Contributions are welcome! Please open an issue or submit a pull request.
